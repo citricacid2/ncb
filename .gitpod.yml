@@ -1,0 +1,8 @@
+ports:
+  - port: 3000
+    visibility: private
+
+tasks:
+  - name: Next
+    init: yarn install
+    command: yarn dev
