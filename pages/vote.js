@@ -8,15 +8,29 @@ export default function Vote() {
     {name: 'Paul', votes: 9},
   ])
 
+  var stringToColour = function(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    var colour = '#';
+    for (var i = 0; i < 3; i++) {
+      var value = (hash >> (i * 8)) & 0xFF;
+      colour += ('00' + value.toString(16)).substr(-2);
+    }
+    return colour;
+  }
+
   return (
     <div className='m-6'>
       <div className="columns">
-        <div className="column is-half is-offset-one-quarter is-full-mobile">
+        <div className="column is-4 is-offset-4 is-full-tablet">
           <Doughnut data={
             {
               labels: data.map(item => item.name),
               datasets: [{
                 data: data.map(item => item.votes),
+                backgroundColor: data.map(item => stringToColour(item.name))
               }]
             }
           }/>
